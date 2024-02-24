@@ -106,10 +106,19 @@ namespace WindowsFormsAppXml
                 textLabel.Text = element.Value;
             }
         }
-        // Obsluha události kliknutí na tlačítko "Uložit"
-        private void saveButton_Click(object sender, EventArgs e)
+        
+        // Modifikace XML dokumentu
+        private XDocument ModifyDocument(XDocument document)
         {
-            // Zobrazení SaveFileDialog pro uložení XML souboru
+            // Změna názvů uzlů podle TreeView
+            spravceXmlSouboru.ChangeNodeNames(document.Root, xmlTreeView.Nodes[0]);
+
+            return document;
+        }
+
+        // Obsluha události kliknutí na tlačítko "Uložit"
+        private void ulozitToolStripButton_Click(object sender, EventArgs e)
+        {// Zobrazení SaveFileDialog pro uložení XML souboru
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "XML files (*.xml)|*.xml";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -126,18 +135,12 @@ namespace WindowsFormsAppXml
                     MessageBox.Show($"Chyba při ukládání souboru: {ex.Message}", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }        // Modifikace XML dokumentu
-        private XDocument ModifyDocument(XDocument document)
-        {
-            // Změna názvů uzlů podle TreeView
-            spravceXmlSouboru.ChangeNodeNames(document.Root, xmlTreeView.Nodes[0]);
-
-            return document;
         }
+
+    
         // Obsluha události kliknutí na tlačítko "Zavřít"
-        private void closeButton_Click(object sender, EventArgs e)
-        {
-            // Vyprázdnění TreeView a Labelů
+        private void zavritToolStripButton_Click(object sender, EventArgs e)
+        {// Vyprázdnění TreeView a Labelů
             xmlTreeView.Nodes.Clear();
             nazevSouboruLabel.Text = string.Empty;
             hloubkaLabel.Text = string.Empty;
@@ -148,8 +151,8 @@ namespace WindowsFormsAppXml
             poradiLabel.Text = string.Empty;
             atributyLabel.Text = string.Empty;
             textLabel.Text = string.Empty;
-        }
 
+        }
     }
 }
 

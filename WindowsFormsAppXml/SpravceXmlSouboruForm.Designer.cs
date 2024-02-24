@@ -104,6 +104,7 @@
             this.ulozitToolStripButton.Padding = new System.Windows.Forms.Padding(5);
             this.ulozitToolStripButton.Size = new System.Drawing.Size(76, 29);
             this.ulozitToolStripButton.Text = "Uložit";
+            this.ulozitToolStripButton.Click += new System.EventHandler(this.ulozitToolStripButton_Click);
             // 
             // zavritToolStripButton
             // 
@@ -119,6 +120,7 @@
             this.zavritToolStripButton.Size = new System.Drawing.Size(76, 29);
             this.zavritToolStripButton.Text = "Zavřít";
             this.zavritToolStripButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.zavritToolStripButton.Click += new System.EventHandler(this.zavritToolStripButton_Click);
             // 
             // xmlTreeView
             // 

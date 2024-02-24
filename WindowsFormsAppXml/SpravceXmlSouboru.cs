@@ -18,7 +18,20 @@ namespace WindowsFormsAppXml
             foreach (var child in element.Elements())
             {
                 var childNode = node.Nodes.Add(child.Name.LocalName);
-                AddNodes(child, childNode);
+
+                if (child.HasElements)
+                {
+                    // Pokud má prvek potomky, označíme ho jako větvový uzel
+                    childNode.ImageKey = "vetviciUzel";
+                    childNode.SelectedImageKey = "vetviciUzel";
+                    AddNodes(child, childNode); // Rekurzivně přidáme potomky
+                }
+                else
+                {
+                    // Pokud nemá prvek potomky, označíme ho jako koncový uzel
+                    childNode.ImageKey = "koncovyUzel";
+                    childNode.SelectedImageKey = "koncovyUzel";
+                }
             }
         }
 

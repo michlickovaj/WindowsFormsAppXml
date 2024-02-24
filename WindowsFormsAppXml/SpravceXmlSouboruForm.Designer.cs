@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(xmlForm));
             this.menuToolStrip = new System.Windows.Forms.ToolStrip();
             this.otevritToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ulozitToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.zavritToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.xmlTreeView = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.nazevSouboruLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -70,7 +72,7 @@
             this.menuToolStrip.Location = new System.Drawing.Point(0, 0);
             this.menuToolStrip.Margin = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.menuToolStrip.Name = "menuToolStrip";
-            this.menuToolStrip.Size = new System.Drawing.Size(800, 38);
+            this.menuToolStrip.Size = new System.Drawing.Size(800, 34);
             this.menuToolStrip.TabIndex = 0;
             this.menuToolStrip.Text = "toolStrip1";
             // 
@@ -120,10 +122,20 @@
             // 
             // xmlTreeView
             // 
+            this.xmlTreeView.ImageIndex = 0;
+            this.xmlTreeView.ImageList = this.imageList1;
             this.xmlTreeView.Location = new System.Drawing.Point(12, 60);
             this.xmlTreeView.Name = "xmlTreeView";
+            this.xmlTreeView.SelectedImageIndex = 0;
             this.xmlTreeView.Size = new System.Drawing.Size(372, 360);
             this.xmlTreeView.TabIndex = 1;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "vetviciUzel");
+            this.imageList1.Images.SetKeyName(1, "koncovyUzel");
             // 
             // label1
             // 
@@ -361,6 +373,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label textLabel;
         private System.Windows.Forms.Label atributyLabel;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 

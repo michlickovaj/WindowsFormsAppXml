@@ -22,16 +22,17 @@ namespace WindowsFormsAppXml
             InitializeComponent();
         }
         // Obsluha události načtení hlavního formuláře
-        private void otevritToolStripButton_Click(object sender, EventArgs e)
-
-        {   // Vyčištění TreeView
+        
+    private void otevritToolStripButton_Click(object sender, EventArgs e)
+        {
+            // Vyčištění TreeView
             xmlTreeView.Nodes.Clear();
 
             // Zobrazení OpenFileDialog pro výběr XML souboru
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Title = "Vyberte soubor";
-                openFileDialog.Filter = "XML soubory (*.txt)|*.xml";
+                openFileDialog.Filter = "XML soubory (*.xml)|*.xml";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -41,14 +42,12 @@ namespace WindowsFormsAppXml
                         var xmlDocument = XDocument.Load(openFileDialog.FileName);
 
                         // Vytvoření kořenového uzlu
-                        var root = new TreeNode(Path.GetFileName(openFileDialog.FileName));
+                        string rootElementName = xmlDocument.Root.Name.LocalName;
+                        var root = new TreeNode(rootElementName);
                         xmlTreeView.Nodes.Add(root);
 
                         // Přidání uzlů do stromu
                         spravceXmlSouboru.AddNodes(xmlDocument.Root, root);
-
-                        // Zobrazení informací o XML souboru
-                        ShowFileInfo(xmlDocument);
                     }
                     catch (Exception ex)
                     {
@@ -57,7 +56,9 @@ namespace WindowsFormsAppXml
                 }
             }
         }
-         // Zobrazení informací o XML souboru
+
+       
+        // Zobrazení informací o XML souboru
         private void ShowFileInfo(XDocument document)
         {
             // Název souboru bez cesty
@@ -76,14 +77,12 @@ namespace WindowsFormsAppXml
             maxAtributuLabel.Text = document.Root.Descendants().Max(e => e.Attributes().Count()).ToString();
         }
         // Obsluha události výběru uzlu v TreeView
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void xmlTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // Zobrazení informací o vybraném elementu
             var element = spravceXmlSouboru.FindElementByName(XDocument.Load(xmlTreeView.Nodes[0].Text), e.Node.Text);
-            if (element != null)
-            {
-                ShowElementInfo(element);
-            }
+            ShowElementInfo(element);
+            
         }
         // Zobrazení informací o elementu
         private void ShowElementInfo(XElement element)

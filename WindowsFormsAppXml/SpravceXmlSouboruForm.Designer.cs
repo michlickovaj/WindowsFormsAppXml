@@ -33,27 +33,27 @@
             this.otevritToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ulozitToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.zavritToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.xmlTreeView = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.nazevSouboruLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.hloubkaLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.maxPotomkuLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.minAtributuLabel = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.maxAtributuLabel = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.hloubkaElementuLabel = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.poradiLabel = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
+            this.atributyLabel = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
+            this.textLabel = new System.Windows.Forms.Label();
             this.menuToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,12 +118,12 @@
             this.zavritToolStripButton.Text = "Zavřít";
             this.zavritToolStripButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             // 
-            // treeView1
+            // xmlTreeView
             // 
-            this.treeView1.Location = new System.Drawing.Point(12, 60);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(372, 360);
-            this.treeView1.TabIndex = 1;
+            this.xmlTreeView.Location = new System.Drawing.Point(12, 60);
+            this.xmlTreeView.Name = "xmlTreeView";
+            this.xmlTreeView.Size = new System.Drawing.Size(372, 360);
+            this.xmlTreeView.TabIndex = 1;
             // 
             // label1
             // 
@@ -134,14 +134,13 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Název souboru:";
             // 
-            // label2
+            // nazevSouboruLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(640, 60);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 20);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "label2";
+            this.nazevSouboruLabel.AutoSize = true;
+            this.nazevSouboruLabel.Location = new System.Drawing.Point(640, 60);
+            this.nazevSouboruLabel.Name = "nazevSouboruLabel";
+            this.nazevSouboruLabel.Size = new System.Drawing.Size(0, 20);
+            this.nazevSouboruLabel.TabIndex = 3;
             // 
             // label3
             // 
@@ -152,14 +151,13 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Hloubka nejzanoř.elemetu:";
             // 
-            // label4
+            // hloubkaLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(640, 90);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 20);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "label4";
+            this.hloubkaLabel.AutoSize = true;
+            this.hloubkaLabel.Location = new System.Drawing.Point(640, 90);
+            this.hloubkaLabel.Name = "hloubkaLabel";
+            this.hloubkaLabel.Size = new System.Drawing.Size(0, 20);
+            this.hloubkaLabel.TabIndex = 5;
             // 
             // label5
             // 
@@ -170,14 +168,13 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Maximální počet potomků:";
             // 
-            // label6
+            // maxPotomkuLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(640, 120);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 20);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "label6";
+            this.maxPotomkuLabel.AutoSize = true;
+            this.maxPotomkuLabel.Location = new System.Drawing.Point(640, 120);
+            this.maxPotomkuLabel.Name = "maxPotomkuLabel";
+            this.maxPotomkuLabel.Size = new System.Drawing.Size(0, 20);
+            this.maxPotomkuLabel.TabIndex = 7;
             // 
             // label7
             // 
@@ -188,14 +185,13 @@
             this.label7.TabIndex = 8;
             this.label7.Text = "Minimální počet atributů:";
             // 
-            // label8
+            // minAtributuLabel
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(640, 153);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 20);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "label8";
+            this.minAtributuLabel.AutoSize = true;
+            this.minAtributuLabel.Location = new System.Drawing.Point(640, 153);
+            this.minAtributuLabel.Name = "minAtributuLabel";
+            this.minAtributuLabel.Size = new System.Drawing.Size(0, 20);
+            this.minAtributuLabel.TabIndex = 9;
             // 
             // label9
             // 
@@ -206,14 +202,13 @@
             this.label9.TabIndex = 10;
             this.label9.Text = "Maximální počet atributů:";
             // 
-            // label10
+            // maxAtributuLabel
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(640, 187);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 20);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "label10";
+            this.maxAtributuLabel.AutoSize = true;
+            this.maxAtributuLabel.Location = new System.Drawing.Point(640, 187);
+            this.maxAtributuLabel.Name = "maxAtributuLabel";
+            this.maxAtributuLabel.Size = new System.Drawing.Size(0, 20);
+            this.maxAtributuLabel.TabIndex = 11;
             // 
             // label11
             // 
@@ -244,14 +239,13 @@
             this.label13.TabIndex = 14;
             this.label13.Text = "Hloubka zanoření:";
             // 
-            // label14
+            // hloubkaElementuLabel
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(640, 266);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(60, 20);
-            this.label14.TabIndex = 15;
-            this.label14.Text = "label14";
+            this.hloubkaElementuLabel.AutoSize = true;
+            this.hloubkaElementuLabel.Location = new System.Drawing.Point(640, 266);
+            this.hloubkaElementuLabel.Name = "hloubkaElementuLabel";
+            this.hloubkaElementuLabel.Size = new System.Drawing.Size(0, 20);
+            this.hloubkaElementuLabel.TabIndex = 15;
             // 
             // label15
             // 
@@ -262,14 +256,13 @@
             this.label15.TabIndex = 16;
             this.label15.Text = "Pořadí mezi sourozenci:";
             // 
-            // label16
+            // poradiLabel
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(640, 296);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(60, 20);
-            this.label16.TabIndex = 17;
-            this.label16.Text = "label16";
+            this.poradiLabel.AutoSize = true;
+            this.poradiLabel.Location = new System.Drawing.Point(640, 296);
+            this.poradiLabel.Name = "poradiLabel";
+            this.poradiLabel.Size = new System.Drawing.Size(0, 20);
+            this.poradiLabel.TabIndex = 17;
             // 
             // label17
             // 
@@ -280,14 +273,13 @@
             this.label17.TabIndex = 18;
             this.label17.Text = "Názvy a hodnoty atributů:";
             // 
-            // label18
+            // atributyLabel
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(640, 326);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(60, 20);
-            this.label18.TabIndex = 19;
-            this.label18.Text = "label18";
+            this.atributyLabel.AutoSize = true;
+            this.atributyLabel.Location = new System.Drawing.Point(640, 326);
+            this.atributyLabel.Name = "atributyLabel";
+            this.atributyLabel.Size = new System.Drawing.Size(0, 20);
+            this.atributyLabel.TabIndex = 19;
             // 
             // label19
             // 
@@ -298,41 +290,40 @@
             this.label19.TabIndex = 20;
             this.label19.Text = "Text:";
             // 
-            // label20
+            // textLabel
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(640, 375);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(60, 20);
-            this.label20.TabIndex = 21;
-            this.label20.Text = "label20";
+            this.textLabel.AutoSize = true;
+            this.textLabel.Location = new System.Drawing.Point(640, 375);
+            this.textLabel.Name = "textLabel";
+            this.textLabel.Size = new System.Drawing.Size(0, 20);
+            this.textLabel.TabIndex = 21;
             // 
             // xmlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label20);
+            this.Controls.Add(this.textLabel);
             this.Controls.Add(this.label19);
-            this.Controls.Add(this.label18);
+            this.Controls.Add(this.atributyLabel);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.label16);
+            this.Controls.Add(this.poradiLabel);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
+            this.Controls.Add(this.hloubkaElementuLabel);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.maxAtributuLabel);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.minAtributuLabel);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.maxPotomkuLabel);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.hloubkaLabel);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.nazevSouboruLabel);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.xmlTreeView);
             this.Controls.Add(this.menuToolStrip);
             this.Name = "xmlForm";
             this.Text = "Správce XML souborů";
@@ -349,27 +340,27 @@
         private System.Windows.Forms.ToolStripButton otevritToolStripButton;
         private System.Windows.Forms.ToolStripButton ulozitToolStripButton;
         private System.Windows.Forms.ToolStripButton zavritToolStripButton;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView xmlTreeView;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label nazevSouboruLabel;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label hloubkaLabel;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label maxPotomkuLabel;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label minAtributuLabel;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label maxAtributuLabel;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label hloubkaElementuLabel;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label poradiLabel;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label textLabel;
+        private System.Windows.Forms.Label atributyLabel;
     }
 }
 

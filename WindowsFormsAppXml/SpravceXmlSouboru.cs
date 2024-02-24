@@ -42,13 +42,7 @@ namespace WindowsFormsAppXml
                 }
             }
         }
-        private XDocument ModifyDocument(XDocument document, TreeNode rootNode)
-        {
-            // Změna názvů uzlů podle TreeView
-            ChangeNodeNames(document.Root, rootNode);
-
-            return document;
-
-        }
     }
 }
+        
+    

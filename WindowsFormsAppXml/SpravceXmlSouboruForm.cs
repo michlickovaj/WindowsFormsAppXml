@@ -48,6 +48,8 @@ namespace WindowsFormsAppXml
 
                         // Přidání uzlů do stromu
                         spravceXmlSouboru.AddNodes(xmlDocument.Root, root);
+                        //načtení informací o souboru
+                        ShowFileInfo(xmlDocument);
                     }
                     catch (Exception ex)
                     {
@@ -76,14 +78,7 @@ namespace WindowsFormsAppXml
             // Maximální počet atributů, které nějaký element obsahuje
             maxAtributuLabel.Text = document.Root.Descendants().Max(e => e.Attributes().Count()).ToString();
         }
-        // Obsluha události výběru uzlu v TreeView
-        private void xmlTreeView_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            // Zobrazení informací o vybraném elementu
-            var element = spravceXmlSouboru.FindElementByName(XDocument.Load(xmlTreeView.Nodes[0].Text), e.Node.Text);
-            ShowElementInfo(element);
-            
-        }
+       
         // Zobrazení informací o elementu
         private void ShowElementInfo(XElement element)
         {
@@ -153,8 +148,11 @@ namespace WindowsFormsAppXml
             textLabel.Text = string.Empty;
 
         }
+
     }
 }
+
+
 
   
 

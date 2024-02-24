@@ -126,6 +126,7 @@
             // 
             this.xmlTreeView.ImageIndex = 0;
             this.xmlTreeView.ImageList = this.imageList1;
+            this.xmlTreeView.LabelEdit = true;
             this.xmlTreeView.Location = new System.Drawing.Point(12, 60);
             this.xmlTreeView.Name = "xmlTreeView";
             this.xmlTreeView.SelectedImageIndex = 0;

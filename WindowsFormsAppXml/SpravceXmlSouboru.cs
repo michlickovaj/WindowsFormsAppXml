@@ -35,11 +35,7 @@ namespace WindowsFormsAppXml
             }
         }
 
-        // Hledání elementu podle názvu
-        public XElement FindElementByName(XDocument document, string name)
-        {
-            return document.Descendants().FirstOrDefault(e => e.Name.LocalName == name);
-        }
+       
 
         // Změna názvů uzlů
         public void ChangeNodeNames(XElement element, TreeNode node)

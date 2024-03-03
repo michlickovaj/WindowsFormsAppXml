@@ -132,6 +132,7 @@
             this.xmlTreeView.SelectedImageIndex = 0;
             this.xmlTreeView.Size = new System.Drawing.Size(372, 360);
             this.xmlTreeView.TabIndex = 1;
+            this.xmlTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.xmlTreeView_NodeMouseClick);
             // 
             // imageList1
             // 
@@ -231,7 +232,7 @@
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label11.Location = new System.Drawing.Point(460, 13);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(216, 25);
+            this.label11.Size = new System.Drawing.Size(162, 17);
             this.label11.TabIndex = 12;
             this.label11.Text = "Informace o souboru:";
             // 
@@ -241,7 +242,7 @@
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label12.Location = new System.Drawing.Point(465, 230);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(226, 25);
+            this.label12.Size = new System.Drawing.Size(169, 17);
             this.label12.TabIndex = 13;
             this.label12.Text = "Informace o elementu:";
             // 
@@ -290,6 +291,7 @@
             // 
             // atributyLabel
             // 
+            this.atributyLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.atributyLabel.AutoSize = true;
             this.atributyLabel.Location = new System.Drawing.Point(640, 326);
             this.atributyLabel.Name = "atributyLabel";

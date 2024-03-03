@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="testZmenaNazvu.cs" />
     <EmbeddedResource Include="SpravceXmlSouboruForm.resx">
       <DependentUpon>SpravceXmlSouboruForm.cs</DependentUpon>
     </EmbeddedResource>

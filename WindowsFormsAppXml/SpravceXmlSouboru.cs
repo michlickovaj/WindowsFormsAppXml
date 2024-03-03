@@ -1,57 +1,97 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Windows.Forms;
+using System.Xml;
 
-namespace WindowsFormsAppXml
+internal class SpravceXmlSouboru
 {
-    internal class SpravceXmlSouboru
+    // Přidání uzlů do stromu
+    public void AddNodes(XElement element, TreeNode node)
     {
-        // Přidání uzlů do stromu
-        public void AddNodes(XElement element, TreeNode node)
-        {
-            foreach (var child in element.Elements())
-            {
-                var childNode = node.Nodes.Add(child.Name.LocalName);
+        var childNodes = element.Elements().Select(child => new TreeNode(child.Name.LocalName)).ToArray();
+        node.Nodes.AddRange(childNodes);
 
-                if (child.HasElements)
-                {
-                    // Pokud má prvek potomky, označíme ho jako větvový uzel
-                    childNode.ImageKey = "vetviciUzel";
-                    childNode.SelectedImageKey = "vetviciUzel";
-                    AddNodes(child, childNode); // Rekurzivně přidáme potomky
-                }
-                else
-                {
-                    // Pokud nemá prvek potomky, označíme ho jako koncový uzel
-                    childNode.ImageKey = "koncovyUzel";
-                    childNode.SelectedImageKey = "koncovyUzel";
-                }
+        foreach (var pair in element.Elements().Zip(childNodes, (el, nd) => (el, nd)))
+        {
+            if (pair.el.HasElements)
+            {
+                pair.nd.ImageKey = "vetviciUzel";
+                pair.nd.SelectedImageKey = "vetviciUzel";
+                AddNodes(pair.el, pair.nd); // Rekurzivně přidáme potomky
             }
-        }
-
-       
-
-        // Změna názvů uzlů
-        public void ChangeNodeNames(XElement element, TreeNode node)
-        {
-            element.Name = node.Text;
-
-            foreach (TreeNode childNode in node.Nodes)
+            else
             {
-                var childElement = element.Elements().FirstOrDefault(e => e.Name.LocalName == childNode.Text);
-                if (childElement != null)
-                {
-                    ChangeNodeNames(childElement, childNode);
-                }
+                pair.nd.ImageKey = "koncovyUzel";
+                pair.nd.SelectedImageKey = "koncovyUzel";
             }
         }
     }
-}
-        
+
+    // Změna názvů uzlů   
+    public void ChangeNodeNames(XElement element, TreeNode node)
+    {
+        element.Name = node.Text; // Změna názvu aktuálního elementu
+
+        // Procházení všech potomků aktuálního elementu
+        foreach (var childElement in element.Elements())
+        {
+            // Hledání odpovídajícího uzlu v TreeView podle názvu
+            var correspondingNode = node.Nodes.Cast<TreeNode>().FirstOrDefault(n => n.Text == childElement.Name.LocalName);
+            if (correspondingNode != null)
+            {
+                // Rekurzivní volání ChangeNodeNames pro každého potomka
+                ChangeNodeNames(childElement, correspondingNode);
+            }
+        }
+    }
+    //  Metoda pro uložení souboru
+    public void UlozitXmlSoubor(XDocument xmlDocument, TreeNode rootNode, string filePath)
+    {
+        if (xmlDocument != null)
+        {
+            
+            
+            // Úprava názvů elementů pomocí metody ChangeNodeNames
+            ChangeNodeNames(xmlDocument.Root, rootNode);
+
+            // Uložení změněného XML dokumentu do souboru
+         xmlDocument.Save(filePath);
+            
+         } 
+    }
+    //Metoda pro vyběr elmentu
+    public XElement FindElementByNode(XElement rootElement, string nodeName)
+    {
+        if (rootElement.Name.LocalName == nodeName)
+        {
+            return rootElement;
+        }
+        else
+        {
+            foreach (XElement childElement in rootElement.Elements())
+            {
+                XElement result = FindElementByNode(childElement, nodeName);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+        }
+
+        return null;
+    }
+   
     
+        
+ 
+
+
+
+
+}
+
+
+
+
+

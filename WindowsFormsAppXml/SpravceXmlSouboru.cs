@@ -27,40 +27,30 @@ internal class SpravceXmlSouboru
             }
         }
     }
-
     // Změna názvů uzlů   
     public void ChangeNodeNames(XElement element, TreeNode node)
     {
         element.Name = node.Text; // Změna názvu aktuálního elementu
 
-        // Procházení všech potomků aktuálního elementu
-        foreach (var childElement in element.Elements())
-        {
-            // Hledání odpovídajícího uzlu v TreeView podle názvu
-            var correspondingNode = node.Nodes.Cast<TreeNode>().FirstOrDefault(n => n.Text == childElement.Name.LocalName);
-            if (correspondingNode != null)
-            {
-                // Rekurzivní volání ChangeNodeNames pro každého potomka
-                ChangeNodeNames(childElement, correspondingNode);
-            }
-        }
+        
     }
     //  Metoda pro uložení souboru
     public void UlozitXmlSoubor(XDocument xmlDocument, TreeNode rootNode, string filePath)
     {
         if (xmlDocument != null)
         {
-            
-            
+
+
             // Úprava názvů elementů pomocí metody ChangeNodeNames
             ChangeNodeNames(xmlDocument.Root, rootNode);
 
             // Uložení změněného XML dokumentu do souboru
-         xmlDocument.Save(filePath);
-            
-         } 
+            xmlDocument.Save(filePath);
+
+        }
     }
-    //Metoda pro vyběr elmentu
+
+    //Metoda pro vyběr elementu
     public XElement FindElementByNode(XElement rootElement, string nodeName)
     {
         if (rootElement.Name.LocalName == nodeName)

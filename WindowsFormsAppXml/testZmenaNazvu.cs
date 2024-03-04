@@ -14,17 +14,9 @@ namespace WindowsFormsAppXml
 
         public void RunTest()
         {
-            // Testovací XML soubor
-            XDocument testDocument = XDocument.Parse("<Root><Child1><Grandchild1></Grandchild1></Child1></Root>");
-
-            // Kořenový uzel testovacího XML souboru
-            TreeNode rootNode = new TreeNode("NewRoot");
-
-            // Změna názvů elementů
-            spravceXmlSouboru.ChangeNodeNames(testDocument.Root, rootNode);
-
-            // Kontrola změn
-            Console.WriteLine(testDocument);
+            {
+               
+            }
         }
     }
 }

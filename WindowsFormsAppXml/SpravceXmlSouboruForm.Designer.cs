@@ -124,7 +124,6 @@
             // 
             // xmlTreeView
             // 
-            this.xmlTreeView.HideSelection = false;
             this.xmlTreeView.ImageIndex = 0;
             this.xmlTreeView.ImageList = this.imageList1;
             this.xmlTreeView.LabelEdit = true;

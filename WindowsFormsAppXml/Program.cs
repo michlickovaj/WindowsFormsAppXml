@@ -17,7 +17,9 @@ namespace WindowsFormsAppXml
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new xmlForm());
-            
+            // Zde můžete zavolat testovací metodu
+            /*testZmenaNazvu xmlTest = new testZmenaNazvu();
+            xmlTest.RunTest();*/
 
         }
     }

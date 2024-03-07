@@ -3,54 +3,56 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Windows.Forms;
 using System.Xml;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 internal class SpravceXmlSouboru
 {
     // Přidání uzlů do stromu
     public void AddNodes(XElement element, TreeNode node)
     {
-        var childNodes = element.Elements().Select(child => new TreeNode(child.Name.LocalName)).ToArray();
-        node.Nodes.AddRange(childNodes);
-
-        foreach (var pair in element.Elements().Zip(childNodes, (el, nd) => (el, nd)))
+        foreach (var childElement in element.Elements())
         {
-            if (pair.el.HasElements)
+            var childNode = new TreeNode(childElement.Name.LocalName);
+
+            if (childElement.HasElements)
             {
-                pair.nd.ImageKey = "vetviciUzel";
-                pair.nd.SelectedImageKey = "vetviciUzel";
-                AddNodes(pair.el, pair.nd); // Rekurzivně přidáme potomky
+                childNode.ImageKey = "vetviciUzel";
+                childNode.SelectedImageKey = "vetviciUzel";
+                AddNodes(childElement, childNode); // Rekurzivně přidáme potomky
             }
             else
             {
-                pair.nd.ImageKey = "koncovyUzel";
-                pair.nd.SelectedImageKey = "koncovyUzel";
+                childNode.ImageKey = "koncovyUzel";
+                childNode.SelectedImageKey = "koncovyUzel";
             }
+
+            node.Nodes.Add(childNode);
         }
     }
-    // Změna názvů uzlů   
-    public void ChangeNodeNames(XElement element, TreeNode node)
-    {
-        element.Name = node.Text; // Změna názvu aktuálního elementu
+   
 
-        
-    }
-    //  Metoda pro uložení souboru
-    public void UlozitXmlSoubor(XDocument xmlDocument, TreeNode rootNode, string filePath)
+    // Metoda pro uložení souboru
+    public void UlozitXmlSoubor(XDocument xmlDocument, TreeNode node, string filePath)
     {
-        if (xmlDocument != null)
+        if (xmlDocument != null && node != null)
         {
-
-
             // Úprava názvů elementů pomocí metody ChangeNodeNames
-            ChangeNodeNames(xmlDocument.Root, rootNode);
-
-            // Uložení změněného XML dokumentu do souboru
+            foreach (TreeNode childelement in node.Nodes)
+            {
+               childelement.Name = node.Text;
+               
+            }
             xmlDocument.Save(filePath);
+            // Uložení změněného XML dokumentu do souboru
 
+        }
+        else
+        {
+            Console.WriteLine("xmlDocument nebo node je null.");
         }
     }
 
-    //Metoda pro vyběr elementu
+    //Metoda pro vyběr elmentu
     public XElement FindElementByNode(XElement rootElement, string nodeName)
     {
         if (rootElement.Name.LocalName == nodeName)

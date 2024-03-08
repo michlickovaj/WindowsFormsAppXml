@@ -10,7 +10,7 @@ namespace WindowsFormsAppXml
     public partial class xmlForm : Form
     {
         private readonly SpravceXmlSouboru spravceXmlSouboru = new SpravceXmlSouboru();
-        private XDocument xmlDocument; 
+        private XDocument xmlDocument;
         public xmlForm()
         {
             InitializeComponent();
@@ -20,6 +20,7 @@ namespace WindowsFormsAppXml
         private void otevritToolStripButton_Click(object sender, EventArgs e)
         {
             xmlTreeView.Nodes.Clear();// Vyčištění TreeView
+            hloubkaElementuLabel.Text = poradiLabel.Text = atributyLabel.Text = textLabel.Text = string.Empty;//Vyčistění info o elementech
 
             // Zobrazení OpenFileDialog pro výběr XML souboru
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -32,7 +33,7 @@ namespace WindowsFormsAppXml
                     try
                     {
                         xmlDocument = XDocument.Load(openFileDialog.FileName); // Inicializace proměnné pro XML dokument
-     
+
                         // Vytvoření kořenového uzlu
                         string rootElementName = xmlDocument.Root.Name.LocalName;
                         var root = new TreeNode(rootElementName);
@@ -42,7 +43,7 @@ namespace WindowsFormsAppXml
 
                         xmlTreeView.ExpandAll(); // Rozbalení všech uzlů
 
-                        ShowFileInfo(xmlDocument,openFileDialog); // Načtení informací o souboru
+                        ShowFileInfo(xmlDocument, openFileDialog); // Načtení informací o souboru
 
                     }
                     catch (Exception ex)
@@ -59,7 +60,7 @@ namespace WindowsFormsAppXml
 
 
             // Název souboru bez cesty
-            
+
             nazevSouboruLabel.Text = System.IO.Path.GetFileName(openFileDialog.FileName);
 
             // Hloubka nejzanorenějšího elementu
@@ -89,7 +90,7 @@ namespace WindowsFormsAppXml
                         try
                         {
                             // Uložení změněného XML dokumentu do souboru
-                            spravceXmlSouboru.UlozitXmlSoubor(xmlDocument, xmlTreeView.Nodes[0],saveFileDialog.FileName);
+                            spravceXmlSouboru.UlozitXmlSoubor(xmlDocument, xmlTreeView.Nodes[0], xmlDocument.Root, saveFileDialog.FileName);
 
                             MessageBox.Show("Soubor byl úspěšně uložen.", "Úspěch", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -104,8 +105,8 @@ namespace WindowsFormsAppXml
                 MessageBox.Show("Není vybrán žádný soubor");
         }
 
-            // Obsluha události kliknutí na tlačítko "Zavřít"
-            private void zavritToolStripButton_Click(object sender, EventArgs e)
+        // Obsluha události kliknutí na tlačítko "Zavřít"
+        private void zavritToolStripButton_Click(object sender, EventArgs e)
         {
             // Vyprázdnění TreeView a Labelů
             xmlTreeView.Nodes.Clear();
@@ -129,7 +130,7 @@ namespace WindowsFormsAppXml
                     hloubkaElementuLabel.Text = element.Ancestors().Count().ToString();
 
                     // Pořadí mezi sourozenci
-                    poradiLabel.Text = (element.ElementsBeforeSelf().Count()+1).ToString();
+                    poradiLabel.Text = (element.ElementsBeforeSelf().Count() + 1).ToString();
 
                     // Názvy a hodnoty atributů
                     string attributesInfo = "";
@@ -156,5 +157,6 @@ namespace WindowsFormsAppXml
             }
 
         }
+
     }
 }

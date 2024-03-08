@@ -29,26 +29,22 @@ internal class SpravceXmlSouboru
             node.Nodes.Add(childNode);
         }
     }
-   
 
-    // Metoda pro uložení souboru
-    public void UlozitXmlSoubor(XDocument xmlDocument, TreeNode node, string filePath)
+    
+    //  Metoda pro uložení souboru
+    public void UlozitXmlSoubor(XDocument xmlDocument, TreeNode korenovyUzel, XElement korenovyElement, string filePath)
     {
-        if (xmlDocument != null && node != null)
+        if (xmlDocument != null)
         {
             // Úprava názvů elementů pomocí metody ChangeNodeNames
-            foreach (TreeNode childelement in node.Nodes)
-            {
-               childelement.Name = node.Text;
-               
-            }
-            xmlDocument.Save(filePath);
-            // Uložení změněného XML dokumentu do souboru
+            foreach (XElement childElement in korenovyElement.Elements())
+                foreach (TreeNode uzel in korenovyUzel.Nodes)
 
-        }
-        else
-        {
-            Console.WriteLine("xmlDocument nebo node je null.");
+                    childElement.Name = uzel.Text;
+
+            // Uložení změněného XML dokumentu do souboru
+            xmlDocument.Save(filePath);
+
         }
     }
 

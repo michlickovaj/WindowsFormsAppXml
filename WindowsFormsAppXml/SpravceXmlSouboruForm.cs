@@ -20,7 +20,7 @@ namespace WindowsFormsAppXml
         private void otevritToolStripButton_Click(object sender, EventArgs e)
         {
             xmlTreeView.Nodes.Clear();// Vyčištění TreeView
-            hloubkaElementuLabel.Text = poradiLabel.Text = atributyLabel.Text = textLabel.Text = string.Empty;//Vyčistění info o elementech
+            nazevSouboruLabel.Text = hloubkaLabel.Text = maxPotomkuLabel.Text = minAtributuLabel.Text = maxAtributuLabel.Text = hloubkaElementuLabel.Text = poradiLabel.Text = atributyLabel.Text = textLabel.Text = string.Empty;//Vyčistění info o elementech
 
             // Zobrazení OpenFileDialog pro výběr XML souboru
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -90,7 +90,7 @@ namespace WindowsFormsAppXml
                         try
                         {
                             // Uložení změněného XML dokumentu do souboru
-                            spravceXmlSouboru.UlozitXmlSoubor(xmlDocument, xmlTreeView.Nodes[0], xmlDocument.Root, saveFileDialog.FileName);
+                            spravceXmlSouboru.UlozitXmlSoubor(xmlDocument, xmlTreeView.Nodes[0], saveFileDialog.FileName);
 
                             MessageBox.Show("Soubor byl úspěšně uložen.", "Úspěch", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -102,7 +102,7 @@ namespace WindowsFormsAppXml
                 }
 
             else
-                MessageBox.Show("Není vybrán žádný soubor");
+            { MessageBox.Show("Není vybrán žádný soubor"); }
         }
 
         // Obsluha události kliknutí na tlačítko "Zavřít"
@@ -111,23 +111,31 @@ namespace WindowsFormsAppXml
             // Vyprázdnění TreeView a Labelů
             xmlTreeView.Nodes.Clear();
             nazevSouboruLabel.Text = hloubkaLabel.Text = maxPotomkuLabel.Text = minAtributuLabel.Text = maxAtributuLabel.Text = hloubkaElementuLabel.Text = poradiLabel.Text = atributyLabel.Text = textLabel.Text = string.Empty;
+            xmlDocument = null;
         }
 
-        private void xmlTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        
+        private void xmlTreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            if (e.Label != null) // Kontrola, zda byl název změněn
+            {
+                e.Node.Tag = e.Node.Text;
+
+            }
+        }
+
+        private void xmlTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             {
-                TreeNode selectedNode = e.Node; // Získání vybraného uzlu
-
-                // Získání odpovídajícího XElementu
-                XElement element = spravceXmlSouboru.FindElementByNode(xmlDocument.Root, selectedNode.Text);
+                XElement element = spravceXmlSouboru.HledejElementPodleNazvuNode(xmlDocument.Root, e.Node.Text);  // Získání odpovídajícího XElementu
 
                 // Zobrazit informace o vybraném elementu
-
                 if (element != null)
                 {
 
                     // Hloubka zanoření
-                    hloubkaElementuLabel.Text = element.Ancestors().Count().ToString();
+                    hloubkaElementuLabel.Text = element.AncestorsAndSelf().Count().ToString();
+                    Console.WriteLine(hloubkaElementuLabel.Text);
 
                     // Pořadí mezi sourozenci
                     poradiLabel.Text = (element.ElementsBeforeSelf().Count() + 1).ToString();
@@ -140,23 +148,20 @@ namespace WindowsFormsAppXml
                     }
                     atributyLabel.Text = attributesInfo;
 
+
                     // Text koncového elementu
                     if (!element.HasElements)
                     {
                         textLabel.Text = element.Value;
                     }
+                }
 
-                    else
-                    {
-                        // Vyprázdnit všechny informace, pokud element není vybrán
-                        hloubkaElementuLabel.Text = poradiLabel.Text = atributyLabel.Text = textLabel.Text = string.Empty;
-                    }
-
-
+                else
+                {
+                    // Vyprázdnit všechny informace, pokud element není vybrán
+                    hloubkaElementuLabel.Text = poradiLabel.Text = atributyLabel.Text = textLabel.Text = string.Empty;
+                }
                 }
             }
-
         }
-
     }
-}

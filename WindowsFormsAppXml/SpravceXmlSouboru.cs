@@ -30,26 +30,48 @@ internal class SpravceXmlSouboru
         }
     }
 
-    
-    //  Metoda pro uložení souboru
-    public void UlozitXmlSoubor(XDocument xmlDocument, TreeNode korenovyUzel, XElement korenovyElement, string filePath)
+
+    // Metoda pro uložení souboru
+    public void UlozitXmlSoubor(XDocument xmlDocument, TreeNode korenovyUzel, string filePath)
     {
         if (xmlDocument != null)
         {
-            // Úprava názvů elementů pomocí metody ChangeNodeNames
-            foreach (XElement childElement in korenovyElement.Elements())
-                foreach (TreeNode uzel in korenovyUzel.Nodes)
 
-                    childElement.Name = uzel.Text;
-
-            // Uložení změněného XML dokumentu do souboru
+            AktualizujXML(korenovyUzel, xmlDocument.Root);
             xmlDocument.Save(filePath);
+            // Uložení změněného XML dokumentu do souboru
 
+        }
+        
+
+    }
+    public void AktualizujXML(TreeNode korenovyUzel, XElement korenovyElement)
+    {
+        if (korenovyElement.Name != korenovyUzel.Text)
+        {
+            korenovyElement.Name = korenovyUzel.Text;
+        }
+
+        foreach (TreeNode node in korenovyUzel.Nodes)
+        {
+            if (node.Tag == null)
+            {
+                continue; // Pokračujeme k dalšímu uzlu, pokud není nastaven Tag
+            }
+            string puvodniNazev = node.Tag.ToString();
+            XElement odpovidajiciElement = korenovyElement.Element(puvodniNazev);
+            if (odpovidajiciElement != null && odpovidajiciElement.Name != node.Text)
+            { odpovidajiciElement.Name = node.Text; }
+            if (node.Nodes.Count > 0)
+            {
+                AktualizujXML(node, odpovidajiciElement);
+            }
         }
     }
 
+
     //Metoda pro vyběr elmentu
-    public XElement FindElementByNode(XElement rootElement, string nodeName)
+    public XElement HledejElementPodleNazvuNode(XElement rootElement, string nodeName)
     {
         if (rootElement.Name.LocalName == nodeName)
         {
@@ -59,14 +81,13 @@ internal class SpravceXmlSouboru
         {
             foreach (XElement childElement in rootElement.Elements())
             {
-                XElement result = FindElementByNode(childElement, nodeName);
-                if (result != null)
+                XElement hledanyElement= HledejElementPodleNazvuNode(childElement, nodeName);
+                if (hledanyElement != null)
                 {
-                    return result;
+                    return hledanyElement;
                 }
             }
         }
-
         return null;
     }
    

@@ -73,7 +73,7 @@
             this.menuToolStrip.Location = new System.Drawing.Point(0, 0);
             this.menuToolStrip.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.menuToolStrip.Name = "menuToolStrip";
-            this.menuToolStrip.Size = new System.Drawing.Size(251, 34);
+            this.menuToolStrip.Size = new System.Drawing.Size(282, 34);
             this.menuToolStrip.TabIndex = 0;
             this.menuToolStrip.Text = "toolStrip1";
             // 
@@ -137,7 +137,8 @@
             this.xmlTreeView.SelectedImageIndex = 0;
             this.xmlTreeView.Size = new System.Drawing.Size(249, 235);
             this.xmlTreeView.TabIndex = 1;
-            this.xmlTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.xmlTreeView_NodeMouseClick);
+            this.xmlTreeView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.xmlTreeView_AfterLabelEdit);
+            this.xmlTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.xmlTreeView_AfterSelect);
             // 
             // imageList1
             // 
@@ -303,11 +304,10 @@
             // 
             this.hloubkaElementuLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.hloubkaElementuLabel.AutoSize = true;
             this.hloubkaElementuLabel.Location = new System.Drawing.Point(427, 173);
             this.hloubkaElementuLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.hloubkaElementuLabel.Name = "hloubkaElementuLabel";
-            this.hloubkaElementuLabel.Size = new System.Drawing.Size(0, 13);
+            this.hloubkaElementuLabel.Size = new System.Drawing.Size(20, 13);
             this.hloubkaElementuLabel.TabIndex = 15;
             // 
             // label15

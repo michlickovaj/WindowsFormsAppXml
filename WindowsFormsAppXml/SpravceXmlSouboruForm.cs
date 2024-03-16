@@ -44,6 +44,7 @@ namespace WindowsFormsAppXml
                         xmlTreeView.ExpandAll(); // Rozbalení všech uzlů
 
                         ShowFileInfo(xmlDocument, openFileDialog); // Načtení informací o souboru
+                           
 
                     }
                     catch (Exception ex)

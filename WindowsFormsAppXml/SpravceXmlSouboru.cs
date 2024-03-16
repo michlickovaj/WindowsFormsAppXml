@@ -13,6 +13,7 @@ internal class SpravceXmlSouboru
         foreach (var childElement in element.Elements())
         {
             var childNode = new TreeNode(childElement.Name.LocalName);
+            childNode.Tag = childElement.Name;
 
             if (childElement.HasElements)
             {
@@ -54,10 +55,7 @@ internal class SpravceXmlSouboru
 
         foreach (TreeNode node in korenovyUzel.Nodes)
         {
-            if (node.Tag == null)
-            {
-                continue; // Pokračujeme k dalšímu uzlu, pokud není nastaven Tag
-            }
+            
             string puvodniNazev = node.Tag.ToString();
             XElement odpovidajiciElement = korenovyElement.Element(puvodniNazev);
             if (odpovidajiciElement != null && odpovidajiciElement.Name != node.Text)

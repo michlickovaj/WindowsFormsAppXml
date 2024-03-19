@@ -7,7 +7,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 internal class SpravceXmlSouboru
 {
-    // Přidání uzlů do stromu
+    // Metoda pro přidávání uzlů do stromu
     public void AddNodes(XElement element, TreeNode node)
     {
         foreach (var childElement in element.Elements())
@@ -19,7 +19,7 @@ internal class SpravceXmlSouboru
             {
                 childNode.ImageKey = "vetviciUzel";
                 childNode.SelectedImageKey = "vetviciUzel";
-                AddNodes(childElement, childNode); // Rekurzivně přidáme potomky
+                AddNodes(childElement, childNode);
             }
             else
             {
@@ -40,11 +40,7 @@ internal class SpravceXmlSouboru
 
             AktualizujXML(korenovyUzel, xmlDocument.Root);
             xmlDocument.Save(filePath);
-            // Uložení změněného XML dokumentu do souboru
-
-        }
-        
-
+        }   
     }
     public void AktualizujXML(TreeNode korenovyUzel, XElement korenovyElement)
     {
@@ -52,10 +48,8 @@ internal class SpravceXmlSouboru
         {
             korenovyElement.Name = korenovyUzel.Text;
         }
-
         foreach (TreeNode node in korenovyUzel.Nodes)
         {
-            
             string puvodniNazev = node.Tag.ToString();
             XElement odpovidajiciElement = korenovyElement.Element(puvodniNazev);
             if (odpovidajiciElement != null && odpovidajiciElement.Name != node.Text)
@@ -66,7 +60,6 @@ internal class SpravceXmlSouboru
             }
         }
     }
-
 
     //Metoda pro vyběr elmentu
     public XElement HledejElementPodleNazvuNode(XElement rootElement, string nodeName)
@@ -88,14 +81,6 @@ internal class SpravceXmlSouboru
         }
         return null;
     }
-   
-    
-        
- 
-
-
-
-
 }
 
 

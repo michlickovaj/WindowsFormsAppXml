@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using System;
 using System.Linq;
 using System.Windows.Forms.VisualStyles;
+using System.Collections.Generic;
 
 namespace WindowsFormsAppXml
 {
@@ -13,8 +14,11 @@ namespace WindowsFormsAppXml
         private XDocument xmlDocument;
         public xmlForm()
         {
+
             InitializeComponent();
         }
+            
+    
 
         // Obsluha události otevření souboru
         private void otevritToolStripButton_Click(object sender, EventArgs e)
@@ -37,6 +41,7 @@ namespace WindowsFormsAppXml
                         spravceXmlSouboru.AddNodes(xmlDocument.Root, root);
                         xmlTreeView.ExpandAll();
                         ShowFileInfo(xmlDocument, openFileDialog);
+                       
                     }
                     catch (Exception ex)
                     {
@@ -89,15 +94,19 @@ namespace WindowsFormsAppXml
             nazevSouboruLabel.Text = hloubkaLabel.Text = maxPotomkuLabel.Text = minAtributuLabel.Text = maxAtributuLabel.Text = hloubkaElementuLabel.Text = poradiLabel.Text = atributyLabel.Text = textLabel.Text = string.Empty;
             xmlDocument = null;
         }
-        //Uložení původního názvu uzlui při jeho změně
+        //Uložení původního názvu uzlu při jeho změně
         private void xmlTreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
-            if (e.Label != null)
-            {
-                e.Node.Tag = e.Node.Text;
-
+            
+            if (string.IsNullOrEmpty(e.Label))
+            {               
+                e.CancelEdit = true;
+                MessageBox.Show("Název nemůže být prázdný.", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
+    
+        
         // Zbrazení informací o elementech
         private void xmlTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -118,6 +127,8 @@ namespace WindowsFormsAppXml
                     {
                         textLabel.Text = element.Value;
                     }
+                    else
+                    { textLabel.Text = string.Empty; }
                 }
                 else
                 {
@@ -127,3 +138,4 @@ namespace WindowsFormsAppXml
         }
     }
 }
+

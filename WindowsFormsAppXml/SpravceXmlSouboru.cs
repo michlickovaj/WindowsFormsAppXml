@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Collections.Generic;
 
 internal class SpravceXmlSouboru
 {

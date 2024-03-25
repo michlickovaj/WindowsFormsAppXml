@@ -48,6 +48,8 @@ namespace WindowsFormsAppXml
                         MessageBox.Show($"Chyba při otevírání souboru: {ex.Message}", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                else
+                { xmlDocument = null; }
             }
         }
 
@@ -55,7 +57,7 @@ namespace WindowsFormsAppXml
         private void ShowFileInfo(XDocument document, OpenFileDialog openFileDialog)
         {
             nazevSouboruLabel.Text = System.IO.Path.GetFileName(openFileDialog.FileName);
-            hloubkaLabel.Text = document.Root.Descendants().Max(e => e.Ancestors().Count()).ToString();
+            hloubkaLabel.Text = (document.Root.Descendants().Max(e => e.Ancestors().Count())+1).ToString();
             maxPotomkuLabel.Text = document.Root.Descendants().Max(e => e.Elements().Count()).ToString();
             minAtributuLabel.Text = document.Root.Descendants().Min(e => e.Attributes().Count()).ToString();
             maxAtributuLabel.Text = document.Root.Descendants().Max(e => e.Attributes().Count()).ToString();
@@ -94,16 +96,22 @@ namespace WindowsFormsAppXml
             nazevSouboruLabel.Text = hloubkaLabel.Text = maxPotomkuLabel.Text = minAtributuLabel.Text = maxAtributuLabel.Text = hloubkaElementuLabel.Text = poradiLabel.Text = atributyLabel.Text = textLabel.Text = string.Empty;
             xmlDocument = null;
         }
-        //Uložení původního názvu uzlu při jeho změně
+        //ošetření přejmenování elmentu na prázdný řetězec
         private void xmlTreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
-            
-            if (string.IsNullOrEmpty(e.Label))
-            {               
+            if (e.Label == null || e.CancelEdit) // Zkontrolovat, zda bylo přejmenování zrušeno klávesou Esc
+            {
+                e.CancelEdit = true;
+                MessageBox.Show("Přejmenování přerušeno.", "Upozornění", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(e.Label)) // Kontrola prázdného nebo jenom obsahujícího mezery řetězce
+            {
                 e.CancelEdit = true;
                 MessageBox.Show("Název nemůže být prázdný.", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
     
         

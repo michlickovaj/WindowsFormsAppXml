@@ -35,7 +35,7 @@ internal class SpravceXmlSouboru
 
     // Metoda pro uložení souboru
     public void UlozitXmlSoubor(XDocument xmlDocument, TreeNode korenovyUzel, string filePath)
-    {
+    {   
         if (xmlDocument != null)
         {
 
@@ -44,7 +44,12 @@ internal class SpravceXmlSouboru
         }   
     }
     public void AktualizujXML(TreeNode korenovyUzel, XElement korenovyElement)
+
     {
+        if (korenovyUzel == null || korenovyElement == null)
+        {
+            return; // Ukončit rekurzi, pokud jsou vstupní parametry neplatné
+        }
         if (korenovyElement.Name != korenovyUzel.Text)
         {
             korenovyElement.Name = korenovyUzel.Text;
@@ -56,8 +61,9 @@ internal class SpravceXmlSouboru
             if (odpovidajiciElement != null && odpovidajiciElement.Name != node.Text)
             { odpovidajiciElement.Name = node.Text; }
             if (node.Nodes.Count > 0)
-            {
+            {   
                 AktualizujXML(node, odpovidajiciElement);
+
             }
         }
     }
